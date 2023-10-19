@@ -4,8 +4,9 @@ const DATA = [
         title: "תרגול בנושא 1",
         curretntQuestion: 0,
         status: "לא הותחל",
+        startSubSubject: "הקדמה",
         content: {
-            "תת נושא 1": [
+            "הקדמה": [
                 {
                     type: `manyPics`,
                     question: `שאלה עם המון תמונות שאפשר לבחור מהן כמה שרוצים`,
