@@ -31,6 +31,11 @@ const addSpace = (phrase) => {
     return phrase.replace(/_/g, ' ');
 }
 
+const removeSpaceAndStuff = (phrase) => {
+   let result = phrase.match(/[\u0590-\u05fe]/g);
+   return(result.join(''));
+}
+
 const restartTillphone = () => {
     location.reload()
 }
@@ -50,4 +55,16 @@ function iOS() {
     ].includes(navigator.platform)
     // iPad on iOS 13 detection
     || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+}
+
+const findAmountOfQuestions = (bigObj) => {
+    let counter = 0;
+    for (key of Object.keys(bigObj)) {
+        for (item of bigObj[key]) {
+            if (item.type !== "info") {
+                counter++;
+            }
+        }
+    }
+    return counter;
 }
