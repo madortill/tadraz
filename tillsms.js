@@ -412,7 +412,9 @@ const endTillsmsExer = () => {
     } else {
         document.querySelector(".tillsmsExerciseCounter").classList.add("hidden");
         console.log("end");
-        document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `סיימתם את הלומדה!`;
+        let date = new Date();
+        document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `סיימתם את הלומדה! בתאריך ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} בשעה ${date.getHours()}:${date.getMinutes()}`;
+        document.querySelector(".tillsmsExerArrow").style.pointerEvents = "none";
         let finishMessage = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble",], listeners: {click: sendHome}},
             El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
             El("div",{classes: ["tillsmsQuestion", "tillsmsSendHomeMessege"]}, "לחצו כדי להמשיך למסך הסיום",
@@ -423,4 +425,3 @@ const endTillsmsExer = () => {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
     }
 }
-
