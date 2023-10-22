@@ -42,7 +42,6 @@ function openFullscreen() {
 }
 
 function exitHandler(){
-    console.log(document.webkitIsFullScreen);
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
         let addFullscreen = El("img", {attributes: {src: "../assets/images/fullScreenButton.svg", class: "fullScreenButton"}, listeners: {"click": openFullscreen}});
         document.querySelector(".logoAndFullScreen").prepend(addFullscreen);
@@ -143,7 +142,6 @@ const startQuestion = () => {
     }
     document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="all";
     // create question if it hasn't been created already
-    console.log(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}Question${ntillsmsCurrentQuestion}`);
     if (!document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}Question${ntillsmsCurrentQuestion}`)) { 
         let question = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}Question${ntillsmsCurrentQuestion}`]},
             El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
@@ -172,12 +170,12 @@ const startQuestion = () => {
             })
             break;
         case "info":
+            document.querySelector(".tillsmsExerArrow").style.pointerEvents = "none";
             let answer = El("div", {classes: []}, "קיבלתם הודעה חדשה, קראו אותה");
             document.querySelector(`.tillsmsAnswersContainer`).append(answer);
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
             setTimeout(() => {
                 console.log("timeout");
-                document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
                 arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0]++;
                 ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0];
                 document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`;
@@ -186,6 +184,7 @@ const startQuestion = () => {
                 } else {
                     endTillsmsExer();
                 }
+                document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
             }, 3000);
             break;
         case "crossroadQuestion": 
@@ -336,9 +335,18 @@ const checkAnswer = () => {
 
             // move to next question or end exer
         setTimeout(() => {
-            console.warn('Do a check that you didn\'t reach the end of questions!');
-            document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
-            startQuestion();
+            //  make sure we didn't reach the end of questions in subSubject
+            if ((ntillsmsCurrentQuestion) !== arrtillsmsQuestions[tillsmsCurrentExer].content[currSubSubject].length) { 
+                document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
+                startQuestion();
+            } else if (objTillsmsCurrentQuestion.nextSub) {
+                nextSub();
+                return
+            } else {
+                console.error(`Please add "nextSub" to the last question in each subSubject. problem in ${objTillsmsCurrentQuestion.quesiton}`);
+                return;
+            }
+
         }, 3000);
     } else {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
@@ -350,18 +358,24 @@ const checkAnswer = () => {
         document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerAmount`).innerHTML = `${findAmountOfQuestions(arrtillsmsQuestions[exer].content) - ntillsmsCurrentQuestion}`
 
         setTimeout(() => {
-            if (objTillsmsCurrentQuestion.answers[answerContentToSend] === "end") {
-                endTillsmsExer();
-                return;
-            } else 
-            currSubSubject = objTillsmsCurrentQuestion.answers[answerContentToSend];
-            console.log(currSubSubject);
-            ntillsmsCurrentQuestion = 0;
-            arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[1] = currSubSubject;
-            startQuestion();
+            nextSub();
         }, 1500)
     }
 
+
+    const nextSub = () => {
+        let subToGoto = objTillsmsCurrentQuestion.type === "crossroadQuestion" ? objTillsmsCurrentQuestion.answers[answerContentToSend] : objTillsmsCurrentQuestion.nextSub;
+        if (subToGoto === "end") {
+            document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
+            endTillsmsExer();
+            return;
+        } else 
+        currSubSubject = subToGoto;
+        ntillsmsCurrentQuestion = 0;
+        arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0] = 0;
+        arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[1] = currSubSubject;
+        startQuestion();
+    }
     // move to next question or end exer
     // setTimeout(() => {
     //     document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
@@ -397,7 +411,7 @@ const endTillsmsExer = () => {
         document.querySelector(".tillsmsExerciseCounter").innerHTML = `${nTillsmsAmountOfExers} צאטים שלא נקראו`;
     } else {
         document.querySelector(".tillsmsExerciseCounter").classList.add("hidden");
-        alert("end");
+        console.log("end");
         document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `סיימתם את הלומדה!`;
         let finishMessage = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble",], listeners: {click: sendHome}},
             El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
