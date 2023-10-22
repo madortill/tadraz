@@ -37,6 +37,7 @@ const DATA = [
     //     }
     // },
     {
+
         pic: "../assets/images/questionsPics/example1.jpg",
         title: "בטיחות בדרכים",
         curretntQuestion: [0, "הקדמה"],
@@ -82,6 +83,8 @@ const DATA = [
                     answers: ["סכנה בחטיפת חיילים", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה.", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור.`, "שיהיה מביך ברכב", "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`, `ans2`, `ans3`] // the legth will determine how many answers are reqwiered
                 },
+            ],
+            'תחבצ': [
                 {
                     type: "info",
                     content: `לא לשכוח את הדגשים לנסיעה ברכב פרטי: \n
