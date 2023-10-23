@@ -1,153 +1,153 @@
 const DATA = [
 // nextSub is end when you want to end the chat
-    // {
-    //     pic: "./assets/images/bus.svg",
-    //     title: "בטיחות בדרכים",
-    //     // curretntQuestion: [current question in sub-subject (number), current sub-subject, totalQuestionCounter]
-    //     curretntQuestion: [0, "הקדמה"],
-    //     status: "לא הותחל",
-    //     startSubSubject: "הקדמה",
-    //     content: {
-    //         "הקדמה": [
-    //             {
-    //                 type: `crossroadQuestion`,
-    //                 question: `איך מגיעים הביתה?`,
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: { "תחבורה ציבורית (כולל שאטלים)": "תחבצ", "טרמפים": "טרמפים", "רכב פרטי": "רכב" },// the legth will determine how many answers will apear
-    //             },
-    //         ],
-    //         'תחבצ': [
-    //             {
-    //                 type: "info",
-    //                 info: `יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. <br>
-    //                 יש להישאר מדוגם במשך כל הנסיעה. <br>
-    //                 יש לנוע רק עם אוזניה אחת. <br>
-    //                 יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
-    //             },
-    //             {
-    //                 type: `crossroadQuestion`,
-    //                 question: `זוכרים שאסור לעלות על טרמפים?`,
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: { "כן": "איסור טרמפים", "לא": "איסור טרמפים" },
-    //             },
-    //         ],
-    //         "טרמפים": [
-    //             {
-    //                 type: `crossroadQuestion`,
-    //                 question: `זוכרים שאסור לעלות על טרמפים?`,
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: { "כן": "איסור טרמפים טרמפ", "לא": "איסור טרמפים טרמפ" }
-    //             }
-    //         ],
-    //         "איסור טרמפים": [
-    //             {
-    //                 type: `manyChoices`,
-    //                 question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: ["סכנה בחטיפת חיילים", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה.", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור.`, "שיהיה מביך ברכב", "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
-    //                 correctAns: [`ans1`, `ans2`, `ans3`] // the legth will determine how many answers are reqwiered
-    //             },
-    //             {
-    //                 type: "info",
-    //                 info: `לא לשכוח את הדגשים לנסיעה ברכב פרטי: <br></br>
-    //                 1. 7 שעות שינה לפני נהיגה. <br></br>
-    //                 2. אין לנהוג תחת השפעת אלכוהול. <br></br>
-    //                 3. יש לנהוג בהתאם לתנאי מזג האויר.<br></br>
-    //                 4. יש להימנע מהסחים במהלך הנהיגה: טלפון, מזון ועוד. <br></br>
-    //                 5. יש לשים לב למשתמשי דרך.`
-    //             },
-    //             {
-    //                 type: "crossroadQuestion",
-    //                 question: "האם אתה יודע מהם הסימנים המחשידים?",
-    //                 answers: { "כן": "סימנים", "לא": "סימנים" }
-    //             }
-    //         ],
-    //         "איסור טרמפים טרמפ": [
-    //             {
-    //                 type: `manyChoices`,
-    //                 question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: ["סכנה בחטיפת חיילים", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור`, "שיהיה מביך ברכב", "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
-    //                 correctAns: [`ans1`, `ans2`, `ans3`] // the legth will determine how many answers are reqwiered
-    //             },
-    //             {
-    //                 type: "info",
-    //                 info: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: <br></br>
-    //                 יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. <br></br>
-    //                 יש להישאר מדוגם במשך כל הנסיעה ולנוע רק עם אוזניה אחת.<br></br>
-    //                 יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
-    //             },
-    //             {
-    //                 type: "info",
-    //                 info: `לא לשכוח גם את הדגשים לנסיעה ברכב פרטי: <br></br>
-    //                 1. 7 שעות שינה לפני נהיגה. <br></br>
-    //                 2. אין לנהוג תחת השפעת אלכוהול. <br></br>
-    //                 3. יש לנהוג בהתאם לתנאי מזג האויר. <br></br> 
-    //                 4. יש להימנע מהסחים במהלך הנהיגה: טלפון, מזון ועוד. <br></br>
-    //                 5. יש לשים לב למשתמשי דרך.`
-    //             },
-    //             {
-    //                 type: "crossroadQuestion",
-    //                 question: "האם אתה יודע מהם הסימנים המחשידים?",
-    //                 answers: { "כן": "סימנים", "לא": "סימנים" }
-    //             }
-    //         ],
-    //         "רכב": [
-    //             {
-    //                 type: "info",
-    //                 infp: `1. 7 שעות שינה לפני נהיגה. <br></br>
-    //                 2. אין לנהוג תחת השפעת אלכוהול. <br></br>
-    //                 3. יש לנהוג בהתאם לתנאי מזג האויר. <br></br> 
-    //                 4. יש להימנע מהסחים במהלך הנהיגה: טלפון, מזון ועוד. <br></br>
-    //                 5. יש לשים לב למשתמשי דרך.`
-    //             },
-    //             {
-    //                 type: "info",
-    //                 info: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: <br></br>
-    //                 יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. <br></br>
-    //                 יש להישאר מדוגם במשך כל הנסיעה <br></br>
-    //                 יש לנוע רק עם אוזניה אחת. <br></br>
-    //                 יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
-    //             },
-    //             {
-    //                 type: `manyChoices`,
-    //                 question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: ["סכנה בחטיפת חיילים", "שיהיה מביך ברכב", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור`, "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
-    //                 correctAns: [`ans1`, `ans3`, `ans4`] // the legth will determine how many answers are reqwiered
-    //             },
-    //             {
-    //                 type: "crossroadQuestion",
-    //                 question: "האם אתה יודע מהם הסימנים המחשידים?",
-    //                 answers: { "כן": "סימנים", "לא": "סימנים" }
-    //             }
-    //         ],
-    //         "סימנים": [
-    //             {
-    //                 type: "info",
-    //                 info: `חמשת המ״מים: <br></br>  מזג אוויר- ביגוד שאינו תואם למזג האוויר <br></br> ממדים- ביגוד אינו תואם את מימדי התוקף <br></br>
-    //                 מסתור- ריבוי מקומות מסתור בביגוד <br></br> מהודר/ מוזנח- לבוש מהודר שאינו תואם את הסביבה/ לבוש סמרטוטים <br></br> משונה- הופעה אשר שונה מהסביבה <br></br>`
-    //             },
-    //             {
-    //                 type: `manyPics`,
-    //                 question: "תוכלו לשלוח לי תמונה של אדם חשוד?",
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: ["./assets/images/questionsPics/suspect.png"],// the legth will determine how many answers will apear
-    //                 correctAns: [`ans1`] // the legth will determine how many answers are reqwiered
-    //             },
-    //             {
-    //                 type: `manyChoices`,
-    //                 question: `מה הופך את האדם לחשוד?`,
-    //                 nextSub: "end",
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: ["מזג אוויר", "ממדים", "מסתור", `מהודר/ מוזנח`, "משונה"],// the legth will determine how many answers will apear
-    //                 correctAns: [`ans1`, 'ans3'] // the legth will determine how many answers are reqwiered
-    //             },
+    {
+        pic: "./assets/images/bus.svg",
+        title: "בטיחות בדרכים",
+        // curretntQuestion: [current question in sub-subject (number), current sub-subject, totalQuestionCounter]
+        curretntQuestion: [0, "הקדמה"],
+        status: "לא הותחל",
+        startSubSubject: "הקדמה",
+        content: {
+            "הקדמה": [
+                {
+                    type: `crossroadQuestion`,
+                    question: `איך מגיעים הביתה?`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: { "תחבורה ציבורית (כולל שאטלים)": "תחבצ", "טרמפים": "טרמפים", "רכב פרטי": "רכב" },// the legth will determine how many answers will apear
+                },
+            ],
+            'תחבצ': [
+                {
+                    type: "info",
+                    info: `יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. <br>
+                    יש להישאר מדוגם במשך כל הנסיעה. <br>
+                    יש לנוע רק עם אוזניה אחת. <br>
+                    יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
+                },
+                {
+                    type: `crossroadQuestion`,
+                    question: `זוכרים שאסור לעלות על טרמפים?`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: { "כן": "איסור טרמפים", "לא": "איסור טרמפים" },
+                },
+            ],
+            "טרמפים": [
+                {
+                    type: `crossroadQuestion`,
+                    question: `זוכרים שאסור לעלות על טרמפים?`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: { "כן": "איסור טרמפים טרמפ", "לא": "איסור טרמפים טרמפ" }
+                }
+            ],
+            "איסור טרמפים": [
+                {
+                    type: `manyChoices`,
+                    question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: ["סכנה בחטיפת חיילים", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה.", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור.`, "שיהיה מביך ברכב", "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`, `ans2`, `ans3`] // the legth will determine how many answers are reqwiered
+                },
+                {
+                    type: "info",
+                    info: `לא לשכוח את הדגשים לנסיעה ברכב פרטי: <br></br>
+                    1. 7 שעות שינה לפני נהיגה. <br></br>
+                    2. אין לנהוג תחת השפעת אלכוהול. <br></br>
+                    3. יש לנהוג בהתאם לתנאי מזג האויר.<br></br>
+                    4. יש להימנע מהסחים במהלך הנהיגה: טלפון, מזון ועוד. <br></br>
+                    5. יש לשים לב למשתמשי דרך.`
+                },
+                {
+                    type: "crossroadQuestion",
+                    question: "האם אתה יודע מהם הסימנים המחשידים?",
+                    answers: { "כן": "סימנים", "לא": "סימנים" }
+                }
+            ],
+            "איסור טרמפים טרמפ": [
+                {
+                    type: `manyChoices`,
+                    question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: ["סכנה בחטיפת חיילים", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור`, "שיהיה מביך ברכב", "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`, `ans2`, `ans3`] // the legth will determine how many answers are reqwiered
+                },
+                {
+                    type: "info",
+                    info: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: <br></br>
+                    יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. <br></br>
+                    יש להישאר מדוגם במשך כל הנסיעה ולנוע רק עם אוזניה אחת.<br></br>
+                    יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
+                },
+                {
+                    type: "info",
+                    info: `לא לשכוח גם את הדגשים לנסיעה ברכב פרטי: <br></br>
+                    1. 7 שעות שינה לפני נהיגה. <br></br>
+                    2. אין לנהוג תחת השפעת אלכוהול. <br></br>
+                    3. יש לנהוג בהתאם לתנאי מזג האויר. <br></br> 
+                    4. יש להימנע מהסחים במהלך הנהיגה: טלפון, מזון ועוד. <br></br>
+                    5. יש לשים לב למשתמשי דרך.`
+                },
+                {
+                    type: "crossroadQuestion",
+                    question: "האם אתה יודע מהם הסימנים המחשידים?",
+                    answers: { "כן": "סימנים", "לא": "סימנים" }
+                }
+            ],
+            "רכב": [
+                {
+                    type: "info",
+                    infp: `1. 7 שעות שינה לפני נהיגה. <br></br>
+                    2. אין לנהוג תחת השפעת אלכוהול. <br></br>
+                    3. יש לנהוג בהתאם לתנאי מזג האויר. <br></br> 
+                    4. יש להימנע מהסחים במהלך הנהיגה: טלפון, מזון ועוד. <br></br>
+                    5. יש לשים לב למשתמשי דרך.`
+                },
+                {
+                    type: "info",
+                    info: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: <br></br>
+                    יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. <br></br>
+                    יש להישאר מדוגם במשך כל הנסיעה <br></br>
+                    יש לנוע רק עם אוזניה אחת. <br></br>
+                    יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
+                },
+                {
+                    type: `manyChoices`,
+                    question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: ["סכנה בחטיפת חיילים", "שיהיה מביך ברכב", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור`, "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`, `ans3`, `ans4`] // the legth will determine how many answers are reqwiered
+                },
+                {
+                    type: "crossroadQuestion",
+                    question: "האם אתה יודע מהם הסימנים המחשידים?",
+                    answers: { "כן": "סימנים", "לא": "סימנים" }
+                }
+            ],
+            "סימנים": [
+                {
+                    type: "info",
+                    info: `חמשת המ״מים: <br></br>  מזג אוויר- ביגוד שאינו תואם למזג האוויר <br></br> ממדים- ביגוד אינו תואם את מימדי התוקף <br></br>
+                    מסתור- ריבוי מקומות מסתור בביגוד <br></br> מהודר/ מוזנח- לבוש מהודר שאינו תואם את הסביבה/ לבוש סמרטוטים <br></br> משונה- הופעה אשר שונה מהסביבה <br></br>`
+                },
+                {
+                    type: `manyPics`,
+                    question: "תוכלו לשלוח לי תמונה של אדם חשוד?",
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: ["./assets/images/questionsPics/suspect.png"],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`] // the legth will determine how many answers are reqwiered
+                },
+                {
+                    type: `manyChoices`,
+                    question: `מה הופך את האדם לחשוד?`,
+                    nextSub: "end",
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: ["מזג אוויר", "ממדים", "מסתור", `מהודר/ מוזנח`, "משונה"],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`, 'ans3'] // the legth will determine how many answers are reqwiered
+                },
 
-    //         ],
+            ],
 
-    //     }
-    // },
+        }
+    },
     {
         pic: "./assets/images/guns.svg",
         title: "אבטחת נשק",
