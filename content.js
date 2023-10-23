@@ -37,7 +37,7 @@ const DATA = [
     //     }
     // },
     {
-        pic: "./assets/images/questionsPics/example1.jpg",
+        pic: "./assets/images/bus.svg",
         title: "בטיחות בדרכים",
         curretntQuestion: [0, "הקדמה"],
         status: "לא הותחל",
@@ -185,7 +185,7 @@ const DATA = [
         }
     },
     {
-        pic: "./assets/images/questionsPics/example1.jpg",
+        pic: "./assets/images/guns.svg",
         title: "אבטחת נשק",
         curretntQuestion: [0, "הקדמה"],
         status: "לא הותחל",
@@ -252,7 +252,7 @@ const DATA = [
         }
     },
     {
-        pic: "./assets/images/logo.svg",
+        pic: "./assets/images/speaker.svg",
         title: 'נכס״ל',
         curretntQuestion: [0, "הקדמה"],
         status: "לא הותחל",
