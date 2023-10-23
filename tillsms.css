@@ -1,10 +1,10 @@
 /*  Don't forget to change the fill in assets/images/tillsms/blue.svg */
 :root {
-    /* --tillsmsMainDark: #421312;
-    --tillsmsMainLight: #56100f; */
+    --tillsmsMainDark: #56100F;
+    --tillsmsMainLight: #7B1315;
     --tillsmsMessageAlert: rgb(65, 9, 235);
-    --tillsmsMainDark: #1c7c9f;
-    --tillsmsMainLight: #89C2D7;
+    /* --tillsmsMainDark: #1c7c9f;
+    --tillsmsMainLight: #89C2D7; */
 }
 
 body, html {
@@ -46,7 +46,7 @@ body, html {
 
 /* top bar */
 .topBar {
-    background-color: rgba(71, 70, 70, 0.27);
+    background-color: var(--tillsmsMainDark);
     color: white;
     height: 5vh;
     width: 100%;
@@ -132,7 +132,7 @@ body, html {
 }
 
 .tillsmsMainPageHeader {
-    background-color: var(--tillsmsMainDark);
+    background-color: var(--tillsmsMainLight);
     position: absolute;
     width: 100%;
     height: 20vh;
@@ -186,6 +186,7 @@ body, html {
     width: 14vw;
     border-radius: 50%;
     padding: 0.8em;
+
 }
 
 .tillsmsExerciseContainer {
@@ -248,16 +249,18 @@ body, html {
 .tillsmsExerHeader > .tillsmsExerPic {
     padding: 0.8em 0.2em;
     margin-left: 0.6em;
+    
 }
 
 .tillsmsExerPage {
-    background-image: url("../../assets/images/tillsms/bg.jpg");
+    /* background-image: url("../../assets/images/tillsms/bg.jpg"); */
+    background-color: #ececec;
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
 .tillsmsExerheaderContainer {
-    background-color: var(--tillsmsMainDark);
+    background-color: var(--tillsmsMainLight);
     position: absolute;
     width: 100%;
     height: 16vh;
@@ -288,7 +291,7 @@ body, html {
 }
 
 .tillsmsQuestion {
-    background-color: var(--tillsmsMainLight);
+    background-color: white;
     width: fit-content;
     max-width: 60vw;
     height: fit-content;
@@ -309,7 +312,7 @@ body, html {
 }
 
 svg.bubbleArrow  {
-    color: var(--tillsmsMainLight);
+    color: white;
 }
 
 .tillsmsSendArrow {
