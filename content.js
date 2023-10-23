@@ -37,7 +37,7 @@ const DATA = [
     //     }
     // },
     {
-        pic: "../assets/images/questionsPics/example1.jpg",
+        pic: "./assets/images/questionsPics/example1.jpg",
         title: "בטיחות בדרכים",
         curretntQuestion: [0, "הקדמה"],
         status: "לא הותחל",
@@ -168,7 +168,7 @@ const DATA = [
                     type: `manyPics`,
                     question: "תוכלו לשלוח לי תמונה של אדם חשוד?",
                     // recomended: no more than 16 answers, 8 if the are longer than one word
-                    answers: ["../assets/images/questionsPics/suspect.png"],// the legth will determine how many answers will apear
+                    answers: ["./assets/images/questionsPics/suspect.png"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`] // the legth will determine how many answers are reqwiered
                 },
                 {
@@ -185,7 +185,7 @@ const DATA = [
         }
     },
     {
-        pic: "../assets/images/questionsPics/example1.jpg",
+        pic: "./assets/images/questionsPics/example1.jpg",
         title: "אבטחת נשק",
         curretntQuestion: [0, "הקדמה"],
         status: "לא הותחל",
@@ -252,7 +252,7 @@ const DATA = [
         }
     },
     {
-        pic: "../assets/images/logo.svg",
+        pic: "./assets/images/logo.svg",
         title: 'נכס״ל',
         curretntQuestion: [0, "הקדמה"],
         status: "לא הותחל",

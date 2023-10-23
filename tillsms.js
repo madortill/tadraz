@@ -43,7 +43,7 @@ function openFullscreen() {
 
 function exitHandler(){
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
-        let addFullscreen = El("img", {attributes: {src: "../assets/images/fullScreenButton.svg", class: "fullScreenButton"}, listeners: {"click": openFullscreen}});
+        let addFullscreen = El("img", {attributes: {src: "./assets/images/fullScreenButton.svg", class: "fullScreenButton"}, listeners: {"click": openFullscreen}});
         document.querySelector(".logoAndFullScreen").prepend(addFullscreen);
         document.exitFullscreen();
     } else {
@@ -100,7 +100,7 @@ const startExer = (event) => {
     // create header and stsrt question
     let exerHeader = El("div",{cls: "tillsmsExerheaderContainer"},
         El("div",{cls: "tillsmsExerHeader"},
-        El("img",{attributes: {class: "tillsmsExerArrow",src: "../assets/images/tillsms/arrowRight.svg"}, listeners: {"click": () => {
+        El("img",{attributes: {class: "tillsmsExerArrow",src: "./assets/images/tillsms/arrowRight.svg"}, listeners: {"click": () => {
             document.querySelector(`.tillsmsMainPage`).classList.remove("hidden");
             document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerStatus`).innerHTML = `סטטוס: ${arrtillsmsQuestions[tillsmsCurrentExer].status}`;
             let header = document.querySelector(`.tillsmsExerheaderContainer`)
@@ -145,7 +145,7 @@ const startQuestion = () => {
     // create question if it hasn't been created already
     if (!document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}Question${ntillsmsCurrentQuestion}`)) { 
         let question = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}Question${ntillsmsCurrentQuestion}`]},
-            El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+            El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
             El("div",{cls: "tillsmsQuestion"}, objTillsmsCurrentQuestion.question ?? objTillsmsCurrentQuestion.content),
         );
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(question);
@@ -292,7 +292,7 @@ const checkAnswer = () => {
     document.querySelector(`.tillsmsSendBar`).innerHTML = "";
     let answerToSend = El("div",{classes: ["animate__pulse", "tillsmsAnswerBubble", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}`]},
         El("div",{classes: ["tillsmsAnswer", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Content`]},),
-        El("img",{ attributes: {src: "../assets/images/tillsms/white.svg", class: "bubbleArrow"}}),
+        El("img",{ attributes: {src: "./assets/images/tillsms/white.svg", class: "bubbleArrow"}}),
     );
     document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(answerToSend); 
     document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Content`).innerHTML = answerContentToSend;
@@ -304,7 +304,7 @@ const checkAnswer = () => {
         // check if answer was correct, if so update varuble and send messege
         setTimeout(() => {
             let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble"]},
-            El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+            El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
             El("div",{classes: ["tillsmsQuestion", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`]},),
             );
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
@@ -401,7 +401,7 @@ const endTillsmsExer = () => {
     document.querySelector(`.tillsmsAnswerKeybord`).classList.add("hidden")
 
     let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble"]},
-    El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+    El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
     El("div",{classes: ["tillsmsQuestion", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`]}, "מעולה! התרגול הסתיים יכולים לעבור לתרגול הבא"),
     );
     document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
@@ -417,9 +417,9 @@ const endTillsmsExer = () => {
         document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `סיימתם את הלומדה! בתאריך ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} בשעה ${date.getHours()}:${date.getMinutes()}`;
         document.querySelector(".tillsmsExerArrow").style.pointerEvents = "none";
         let finishMessage = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble",], listeners: {click: sendHome}},
-            El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+            El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
             El("div",{classes: ["tillsmsQuestion", "tillsmsSendHomeMessege"]}, "לחצו כדי להמשיך למסך הסיום",
-                El("img", {attributes: {src: "../assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton"}})
+                El("img", {attributes: {src: "./assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton"}})
             ),
         );
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(finishMessage);
