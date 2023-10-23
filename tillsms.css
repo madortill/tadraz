@@ -159,6 +159,8 @@ body, html {
 .tillsmsExerTitleMain {
     font-size: 2em;
     top: -13vh;
+    font-weight: 500;
+    direction: rtl;
 }
 
 
@@ -384,6 +386,10 @@ svg.bubbleArrow  {
     margin: 0.4em;
     text-align: center;
     font-size: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 .manyPicsAns {
