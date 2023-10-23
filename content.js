@@ -37,7 +37,6 @@ const DATA = [
     //     }
     // },
     {
-
         pic: "../assets/images/questionsPics/example1.jpg",
         title: "בטיחות בדרכים",
         curretntQuestion: [0, "הקדמה"],
@@ -93,6 +92,21 @@ const DATA = [
                     3. יש לנהוג בהתאם לתנאי מזג האויר.\n
                     4. יש להימנע מהסחים במהלך הנהיגה: טלפון, מזון ועוד. \n
                     5. יש לשים לב למשתמשי דרך.`
+                },
+                {
+                    type: "info",
+                    content: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: \n
+                    יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. \n
+                    יש להישאר מדוגם במשך כל הנסיעה \n
+                    יש לנוע רק עם אוזניה אחת. \n
+                    יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
+                },
+                {
+                    type: `manyChoices`,
+                    question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: ["סכנה בחטיפת חיילים", "שיהיה מביך ברכב", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור`, "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`, `ans3`, `ans4`] // the legth will determine how many answers are reqwiered
                 },
                 {
                     type: "crossroadQuestion",
@@ -250,6 +264,7 @@ const DATA = [
                     explain: `הנשק הינו רכוש צהל, ופעולה זו מהווה עבירה בציר הצבאי והן האזרחי.`
                 },
             ]
+
         }
     },
     {

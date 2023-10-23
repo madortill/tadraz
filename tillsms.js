@@ -128,7 +128,8 @@ const startExer = (event) => {
 Description: */
 const startQuestion = () => {
     // restore event listeners and save current question object
-    objTillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].content[currSubSubject][ntillsmsCurrentQuestion];
+    objTillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].content[currSubSubject][ntillsmsCurrentQuestion]; 
+    console.log(objTillsmsCurrentQuestion);
     // create question container on first visit and shoe it on next visits
     if (!document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`)) {
         let questionContainer = El("div", {classes: ["tillsmsQuestionContainer", `tillsmsQuestionContainer${tillsmsCurrentExer}`]});
