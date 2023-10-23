@@ -94,7 +94,7 @@ const DATA = [
                 {
                     type: "crossroadQuestion",
                     question: "האם אתה יודע מהם הסימנים המחשידים?",
-                    answers: { "כן": "מכיר סימנים", "לא": "לא מכיר סימנים" }
+                    answers: { "כן": "סימנים", "לא": "סימנים" }
                 }
             ],
             "איסור טרמפים טרמפ": [
@@ -102,7 +102,7 @@ const DATA = [
                     type: `manyChoices`,
                     question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
                     // recomended: no more than 16 answers, 8 if the are longer than one word
-                    answers: ["סכנה בחטיפת חיילים", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה.", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור.`, "שיהיה מביך ברכב", "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
+                    answers: ["סכנה בחטיפת חיילים", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור`, "שיהיה מביך ברכב", "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`, `ans2`, `ans3`] // the legth will determine how many answers are reqwiered
                 },
                 {
@@ -125,7 +125,7 @@ const DATA = [
                 {
                     type: "crossroadQuestion",
                     question: "האם אתה יודע מהם הסימנים המחשידים?",
-                    answers: { "כן": "מכיר סימנים", "לא": "לא מכיר סימנים" }
+                    answers: { "כן": "סימנים", "לא": "סימנים" }
                 }
             ],
             "רכב": [
@@ -155,51 +155,31 @@ const DATA = [
                 {
                     type: "crossroadQuestion",
                     question: "האם אתה יודע מהם הסימנים המחשידים?",
-                    answers: { "כן": "מכיר סימנים", "לא": "לא מכיר סימנים" }
+                    answers: { "כן": "סימנים", "לא": "סימנים" }
                 }
             ],
-            "מכיר סימנים": [
-                {
-                    type: "info",
-                    content: `אז בואו ניזכר בסימנים: \n
-                    חמשת המ״מים: \n  מזג אוויר- ביגוד שאינו תואם למזג האוויר \n ממדים- ביגוד אינו תואם את מימדי התוקף \n
-                    מסתור- ריבוי מקומות מסתור בביגוד \n מהודר/ מוזנח- לבוש מהודר שאינו תואם את הסביבה/ לבוש סמרטוטים \n משונה- הופעה אשר שונה מהסביבה \n`
-                },
-                {
-                    type: `crossroadQuestion`,
-                    question: `תבחר/י בתמונה בה מופיע אדם חשוד`,
-                    // recomended: no more than 16 answers, 8 if the are longer than one word
-                    answers: { "../assets/images/questionsPics/exemple8.jpg": "חשוד", "../assets/images/questionsPics/exemple8.jpg": "לא חשוד" },// the legth will determine how many answers will apear
-                },
-            ],
-            "לא מכיר סימנים": [
+            "סימנים": [
                 {
                     type: "info",
                     content: `חמשת המ״מים: \n  מזג אוויר- ביגוד שאינו תואם למזג האוויר \n ממדים- ביגוד אינו תואם את מימדי התוקף \n
                     מסתור- ריבוי מקומות מסתור בביגוד \n מהודר/ מוזנח- לבוש מהודר שאינו תואם את הסביבה/ לבוש סמרטוטים \n משונה- הופעה אשר שונה מהסביבה \n`
                 },
                 {
-                    type: `crossroadQuestion`,
-                    question: `תבחר/י בתמונה בה מופיע אדם חשוד`,
+                    type: `manyPics`,
+                    question: "תוכלו לשלוח לי תמונה של אדם חשוד?",
                     // recomended: no more than 16 answers, 8 if the are longer than one word
-                    answers: { "../assets/images/questionsPics/exemple8.jpg": "חשוד", "../assets/images/questionsPics/exemple8.jpg": "לא חשוד" },// the legth will determine how many answers will apear
-                },
-            ],
-            "חשוד": [
-                {
-                    type: `manyChoices`,
-                    question: `מה המם שהופכת את האדם לחשוד?`,
-                    // recomended: no more than 16 answers, 8 if the are longer than one word
-                    answers: ["מזג אוויר", "ממדים", "מסתור", `מהודר/ מוזנח`, "משונה"],// the legth will determine how many answers will apear
+                    answers: ["../assets/images/questionsPics/suspect.png"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`] // the legth will determine how many answers are reqwiered
                 },
-            ],
-            "לא חשוד": [
                 {
-                    type: "info",
-                    content: `הדמות שהופיעה חשודה מכיוון ש`
-                }
-            ]
+                    type: `manyChoices`,
+                    question: `מה הופך את האדם לחשוד?`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: ["מזג אוויר", "ממדים", "מסתור", `מהודר/ מוזנח`, "משונה"],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`, 'ans3'] // the legth will determine how many answers are reqwiered
+                },
+
+            ],
 
         }
     },
@@ -225,14 +205,6 @@ const DATA = [
                     answers: ["נכון", "לא נכון"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`], // the legth will determine how many answers are reqwiered
                     explain: `בשביל לצאת עם נשק הביתה נדרש אישור בדרגת אל״ם ומעלה.`
-                },
-                {
-                    type: `manyChoices`,
-                    question: `האם מותר להניח את הנשק מתחת לכיסא במהלך הנסיעה?`,
-                    // recomended: no more than 16 answers, 8 if the are longer than one word
-                    answers: ["נכון", "לא נכון"],// the legth will determine how many answers will apear
-                    correctAns: [`ans2`], // the legth will determine how many answers are reqwiered
-                    explain: `יש לשאת את הנשק עלי במהלך כל הנסיעה עם הקנה כלפי מטה.`
                 },
                 {
                     type: `manyChoices`,
@@ -284,7 +256,7 @@ const DATA = [
         status: "לא הותחל",
         startSubSubject: "הקדמה",
         content: {
-            'נכסל': [
+            'הקדמה': [
                 {
                     type: "crossroadQuestion",
                     question: "יודעים מהי הנחיית הזמינות בסופ״ש?",
@@ -307,10 +279,10 @@ const DATA = [
                 {
                     type: "crossroadQuestion",
                     question: "במידה ויש הקפצה במהלך הסופ״ש יש לך איך להגיע לבסיס?",
-                    answers: { "כן": "סיום נכסל", "לא": "סיום נכסל" } //key = answer, value = subSubject to go to
+                    answers: { "כן": "נכסל", "לא": "נכסל" } //key = answer, value = subSubject to go to
                 },
             ],
-            "סיום נכסל": [
+            "נכסל": [
                 {
                     type: "info",
                     content: "יש לעדכן את המפקדים וזכור: לא עולים על טרמפים!"
@@ -327,7 +299,6 @@ const DATA = [
                     content: " אין להעלות לרשתות החברתיות תוכן צבאי, לשוחח על נושאים צבאיים, לנקוב מיקומים ולמנות סד״כ ברשתות או במקומות אזרחיים."
                 },
             ]
-
 
         }
     },
