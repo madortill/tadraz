@@ -195,7 +195,7 @@ const DATA = [
                 {
                     type: "crossroadQuestion",
                     question: "יוצאים עם נשק הביתה?",
-                    answers: { "כן": "יציאה עם נשק", "לא": "נכסל" } //key = answer, value = subSubject to go to
+                    answers: { "כן": "יציאה עם נשק", "לא": "end" } //key = answer, value = subSubject to go to
                 }
             ],
             "יציאה עם נשק": [
