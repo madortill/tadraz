@@ -2,7 +2,6 @@
 let ntillsmsCorrectAnswers = 0;
 let strTillsmsCorrectAnswer = [];
 let ntillsmsCurrentQuestion;
-let totalQuestionsInSubject = 0;
 let arrtillsmsQuestions = DATA;
 let pageNum = 1;
 let tillsmsCurrentExer;
@@ -13,6 +12,7 @@ let bTillsmsRestart = false;
 let nTillsmsQuestionAnswered = 0;
 let bTillsmsVisited = false;
 let currSubSubject = "";
+let totalCountInSubj; // only to show how many questions left, is not used for logic
 
 var elem = document.querySelector("html");
 
@@ -73,7 +73,7 @@ const createtillsmsContent = () => {
     document.querySelector(".tillsmsMainPageHeader").append(navBar);
     document.querySelector(".tillsmsExercise").classList.add("tillsmsChoosenCategory");
     // create exer page
-    for(exer of Object.keys(arrtillsmsQuestions)) {
+    for(let exer of Object.keys(arrtillsmsQuestions)) {
         let exerContainer = El("div", {classes: ["tillsmsExerciseContainer", `tillsmsExer${exer}`], listeners: {click: startExer}},
             El("img",{attributes: {class: "tillsmsExerPic",src: arrtillsmsQuestions[exer].pic}}),
             El("div", {cls: "tillsmsExerText"},
@@ -103,6 +103,13 @@ const startExer = (event) => {
     document.querySelector(`.tillsmsExerPage`).classList.remove("hidden");
     tillsmsCurrentExer = Number(event.currentTarget.classList[1].slice(11));
     ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0];
+    // if there's a saved total counter, takes it. if not, create one
+    if (arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[2]) {
+        totalCountInSubj = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0];
+    } else {
+        arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[2] = 0;
+        totalCountInSubj = 0;
+    }
     currSubSubject = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[1] || arrtillsmsQuestions[tillsmsCurrentExer].startSubSubject;
     // create header and stsrt question
     let exerHeader = El("div",{cls: "tillsmsExerheaderContainer"},
@@ -124,7 +131,7 @@ const startExer = (event) => {
                 El("div", {cls: "tillsmsExerTitle"}, arrtillsmsQuestions[tillsmsCurrentExer].title),
                 El("div", {cls: "tillsmsExerStatus"}, `סטטוס: ${arrtillsmsQuestions[tillsmsCurrentExer].status}`),
             ),
-            El("div", {cls: "tillsmsExerCounter"}, `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`),
+            El("div", {cls: "tillsmsExerCounter", listeners: {click: secretFunction}}, `${totalCountInSubj}/${findAmountOfQuestions(arrtillsmsQuestions[tillsmsCurrentExer].content)}`),
         )
     );
     document.querySelector(".tillsmsExerPage").append(exerHeader);
@@ -145,8 +152,7 @@ const startQuestion = () => {
     } else {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).classList.remove("hidden");
     }
-    console.warn("change check to if subject is completed ")
-    if (ntillsmsCurrentQuestion === findAmountOfQuestions(arrtillsmsQuestions[exer].content)) {
+    if (arrtillsmsQuestions[tillsmsCurrentExer].status === "הסתיים") {
         document.querySelector(`.tillsmsAnswerKeybord`).classList.add("hidden")
         return;
     }
@@ -355,12 +361,13 @@ const nextSub = (answerContentToSend) => {
         document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
         endTillsmsExer();
         return;
-    } else 
-    currSubSubject = subToGoto;
-    ntillsmsCurrentQuestion = 0;
-    arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0] = 0;
-    arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[1] = currSubSubject;
-    startQuestion();
+    } else {
+        currSubSubject = subToGoto;
+        ntillsmsCurrentQuestion = 0;
+        arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0] = 0;
+        arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[1] = currSubSubject;
+        startQuestion();
+    }
 }
 
 /* nextQuestion
@@ -371,9 +378,13 @@ const nextQuestion = (answerContentToSend) => {
     // update current answer in array and resave it to varible
     arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0]++;
     ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0];
-    document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`,
-    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`;
-    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerAmount`).innerHTML = `${findAmountOfQuestions(arrtillsmsQuestions[exer].content) - ntillsmsCurrentQuestion}`
+    // update totalQuestionCounter
+    arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[2]++;
+    totalCountInSubj = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[2];
+    
+    document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${totalCountInSubj}/${findAmountOfQuestions(arrtillsmsQuestions[tillsmsCurrentExer].content)}`,
+    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${totalCountInSubj}/${findAmountOfQuestions(arrtillsmsQuestions[tillsmsCurrentExer].content)}`;
+    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerAmount`).innerHTML = `${findAmountOfQuestions(arrtillsmsQuestions[tillsmsCurrentExer].content) - totalCountInSubj}`
 
     document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
     //  make sure we didn't reach the end of questions in subSubject
@@ -403,7 +414,10 @@ const endTillsmsExer = () => {
     document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).style.height = "84vh";
     document.querySelector(`.tillsmsAnswerKeybord`).classList.add("hidden")
 
-    let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble"]},
+    // Update counters because some questions might get cut
+    document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${totalCountInSubj}/${totalCountInSubj}`,
+    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${totalCountInSubj}/${totalCountInSubj}`;
+    let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble"]}, 
     El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
     El("div",{classes: ["tillsmsQuestion", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`]}, "מעולה! התרגול הסתיים יכולים לעבור לתרגול הבא"),
     );
@@ -427,5 +441,68 @@ const endTillsmsExer = () => {
         );
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(finishMessage);
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
+    }
+}
+
+let timesClicked = 0;
+const secretFunction = (event) => {
+    if ((tillsmsCurrentExer + 1) === Object.keys(arrtillsmsQuestions).length) {
+        timesClicked++;
+        if (timesClicked === 4) {
+            for (sub of Object.keys(arrtillsmsQuestions[tillsmsCurrentExer].content)) {
+                for (index in arrtillsmsQuestions[tillsmsCurrentExer].content[sub]) {
+                    questionInfo = arrtillsmsQuestions[tillsmsCurrentExer].content[sub][index];
+                    // add question so screen
+                    console.log(`sub: ${sub}, index: ${index}`)
+                    if (document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(sub)}Question${index}`) == null) {
+                        let questionEl = El("div",{classes: ["tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(sub)}Question${index}`]},
+                        El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+                        El("div",{cls: "tillsmsQuestion"}, ))
+                        questionEl.querySelector(".tillsmsQuestion").innerHTML = questionInfo.question ?? questionInfo.info;
+                        document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(questionEl);
+                        
+                        if (questionInfo.type !== "info") {
+                            uContent = questionInfo.type === "crossroadQuestion" ? Object.keys(questionInfo.answers)[0] : questionInfo.answers[0];
+                            // add answer to screen
+                            let answerToSend = El("div",{classes: ["tillsmsAnswerBubble", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(sub)}anwser${index}`]},
+                            El("div",{classes: ["tillsmsAnswer", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(sub)}anwser${index}Content`]}, uContent),
+                            El("img",{ attributes: {src: "./assets/images/tillsms/white.svg", class: "bubbleArrow"}}),
+                            );
+                            document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(answerToSend); 
+    
+                            if (questionInfo.type !== "crossroadQuestion") {
+                                // add feedBack to screen
+                                let feedback = El("div",{classes: ["tillsmsQuestionBubble"]},
+                                El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+                                El("div",{classes: ["tillsmsQuestion", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(sub)}anwser${index}Feedback`]},),
+                                );
+                                document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
+                                document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(sub)}anwser${index}Feedback`).innerHTML = "כל הכבוד! תשובה נכונה"   
+                            }
+                        }
+                    }
+                }
+            }
+            // End
+            document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${findAmountOfQuestions(arrtillsmsQuestions[tillsmsCurrentExer].content)}/${findAmountOfQuestions(arrtillsmsQuestions[tillsmsCurrentExer].content)}`,
+            document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${findAmountOfQuestions(arrtillsmsQuestions[tillsmsCurrentExer].content)}/${findAmountOfQuestions(arrtillsmsQuestions[tillsmsCurrentExer].content)}`;
+            document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerAmount`).classList.add("hidden")
+            document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).style.color = "rgb(143 143 143)";
+            document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).style.height = "84vh";
+            document.querySelector(`.tillsmsAnswerKeybord`).classList.add("hidden")
+
+            let date = new Date();
+            let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble"]},
+            El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+            El("div",{classes: ["tillsmsQuestion", `Feedback`]}, `סיימתם את הלומדה! בתאריך ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} בשעה ${date.getHours()}:${date.getMinutes()}`),
+            );
+
+            document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
+        
+            document.querySelector(".tillsmsExerciseCounter").classList.add("hidden");
+            document.querySelector(".tillsmsExerArrow").style.pointerEvents = "none";
+            document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).style.scrollBehavior = "smooth";
+            document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
+        }
     }
 }
