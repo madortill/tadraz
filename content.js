@@ -174,6 +174,7 @@ const DATA = [
                 {
                     type: `manyChoices`,
                     question: `מה הופך את האדם לחשוד?`,
+                    nextSub: "end",
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: ["מזג אוויר", "ממדים", "מסתור", `מהודר/ מוזנח`, "משונה"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`, 'ans3'] // the legth will determine how many answers are reqwiered
