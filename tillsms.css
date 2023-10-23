@@ -371,6 +371,12 @@ svg.bubbleArrow  {
     /* align-content: center; */
 }
 
+.tillsmsAnswersContainer:has(.info-keyboard) {
+    align-content: center;
+    justify-items: center;
+    color: white;
+}
+
 .tillsmsAns {
     background-color: rgb(255 255 255);
     border-radius: 0.5em;
