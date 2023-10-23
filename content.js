@@ -61,7 +61,7 @@ const DATA = [
                 },
                 {
                     type: `crossroadQuestion`,
-                    question: `זוכר/ת שאסור לעלות על טרמפים?`,
+                    question: `זוכרים שאסור לעלות על טרמפים?`,
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: { "כן": "איסור טרמפים", "לא": "איסור טרמפים" },
                 },
@@ -69,7 +69,7 @@ const DATA = [
             "טרמפים": [
                 {
                     type: `crossroadQuestion`,
-                    question: `זוכר/ת שאסור לעלות על טרמפים?`,
+                    question: `זוכרים שאסור לעלות על טרמפים?`,
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: { "כן": "איסור טרמפים טרמפ", "לא": "איסור טרמפים טרמפ" }
                 }
@@ -109,8 +109,7 @@ const DATA = [
                     type: "info",
                     content: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: \n
                     יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. \n
-                    יש להישאר מדוגם במשך כל הנסיעה \n
-                    יש לנוע רק עם אוזניה אחת. \n
+                    יש להישאר מדוגם במשך כל הנסיעה ולנוע רק עם אוזניה אחת.\n
                     יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
                 },
                 {
@@ -200,8 +199,12 @@ const DATA = [
             ],
             "יציאה עם נשק": [
                 {
+                    type: "info",
+                    content: "ענו על האמירות הבאות:"
+                },
+                {
                     type: `manyChoices`,
-                    question: `האם עליי לקבל אישור ממפקד היחידה?`,
+                    question: ` עליי לקבל אישור ממפקד היחידה.`,
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: ["נכון", "לא נכון"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`], // the legth will determine how many answers are reqwiered
@@ -209,7 +212,15 @@ const DATA = [
                 },
                 {
                     type: `manyChoices`,
-                    question: `האם מותר להניח את הנשק מתחת לכיסא במהלך הנסיעה?`,
+                    question: "מותר לי להניח את הנשק מתחת לכיסא במהלך הנסיעה.",
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: ["נכון", "לא נכון"],// the legth will determine how many answers will apear
+                    correctAns: [`ans2`], // the legth will determine how many answers are reqwiered
+                    explain: `יש לשאת את הנשק עלי במהלך כל הנסיעה עם הקנה כלפי מטה.`
+                },
+                {
+                    type: `manyChoices`,
+                    question: "מותר לי למסור את הנשק שלי לחייל אחר.",
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: ["נכון", "לא נכון"],// the legth will determine how many answers will apear
                     correctAns: [`ans2`], // the legth will determine how many answers are reqwiered
@@ -217,10 +228,10 @@ const DATA = [
                 },
                 {
                     type: `manyChoices`,
-                    question: `אבטחת הנשק בבית מאחורי שני מנעולים והמחסנית בנפרד?`,
+                    question: `חייבים לאבטח את הנשק בבית מאחורי מנעול אחד ומחסנית בנפרד.`,
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: ["נכון", "לא נכון"],// the legth will determine how many answers will apear
-                    correctAns: [`ans1`], // the legth will determine how many answers are reqwiered
+                    correctAns: [`ans2`], // the legth will determine how many answers are reqwiered
                     explain: `אבטחת הנשק בבית מאחורי שני מנעולים והמחסנית בנפרד הינה פקודה.`
                 },
                 {
@@ -233,7 +244,7 @@ const DATA = [
                 },
                 {
                     type: `manyChoices`,
-                    question: `במידה ולא ניתן לאבטח את הנשק לפי הכללים אפקיד בתחנת משטרה צבאית?`,
+                    question: `במידה ולא ניתן לאבטח את הנשק לפי הכללים אפקיד בתחנת משטרה צבאית.`,
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: ["נכון", "לא נכון"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`], // the legth will determine how many answers are reqwiered
@@ -241,7 +252,7 @@ const DATA = [
                 },
                 {
                     type: `manyChoices`,
-                    question: `האם מותר להשתמש בנשק לטובת עבודה אזרחית בסופש?`,
+                    question: `מותר לי להשתמש בנשק לטובת עבודה אזרחית בסופש.`,
                     nextSub: "end",
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: ["נכון", "לא נכון"],// the legth will determine how many answers will apear

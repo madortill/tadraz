@@ -312,7 +312,7 @@ const checkAnswer = () => {
                 ntillsmsCorrectAnswers++;
                 document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = "כל הכבוד! תשובה נכונה"
             } else if (objTillsmsCurrentQuestion.type === "manyChoices"){
-                document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אופס! טעות. התשובה היא: <br> ${strTillsmsCorrectAnswer.join(', ')}${objTillsmsCurrentQuestion.explain ? "הסבר: " + objTillsmsCurrentQuestion.explain : "" }`
+                document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אופס! טעות. התשובה היא: <br> ${strTillsmsCorrectAnswer.join(', ')}${objTillsmsCurrentQuestion.explain ? ". הסבר: " + objTillsmsCurrentQuestion.explain : "" }`
             } else if (objTillsmsCurrentQuestion.type === "manyPics") {
                 document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אופס! טעות. התשובה היא:`
                 strTillsmsCorrectAnswer.forEach(src => {
