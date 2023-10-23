@@ -95,6 +95,7 @@ const createtillsmsContent = () => {
 --------------------------------------------------------------
 Description: */
 const startExer = (event) => {
+    console.log('startExer');
     document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="none";
     document.querySelector(`.tillsmsAnswerKeybord`).classList.remove("hidden")
     // show exer page and save exer index of exer and question
@@ -107,6 +108,7 @@ const startExer = (event) => {
     let exerHeader = El("div",{cls: "tillsmsExerheaderContainer"},
         El("div",{cls: "tillsmsExerHeader"},
         El("img",{attributes: {class: "tillsmsExerArrow",src: "./assets/images/tillsms/arrowRight.svg"}, listeners: {"click": () => {
+            document.querySelector(".tillsmsSendBar").innerHTML = "";
             document.querySelector(`.tillsmsMainPage`).classList.remove("hidden");
             document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerStatus`).innerHTML = `סטטוס: ${arrtillsmsQuestions[tillsmsCurrentExer].status}`;
             let header = document.querySelector(`.tillsmsExerheaderContainer`)
@@ -133,6 +135,7 @@ const startExer = (event) => {
 --------------------------------------------------------------
 Description: */
 const startQuestion = () => {
+    console.log('startQuestion');
     // restore event listeners and save current question object
     objTillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].content[currSubSubject][ntillsmsCurrentQuestion];
     // create question container on first visit and shoe it on next visits
@@ -142,6 +145,7 @@ const startQuestion = () => {
     } else {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).classList.remove("hidden");
     }
+    console.warn("change check to if subject is completed ")
     if (ntillsmsCurrentQuestion === findAmountOfQuestions(arrtillsmsQuestions[exer].content)) {
         document.querySelector(`.tillsmsAnswerKeybord`).classList.add("hidden")
         return;
@@ -157,7 +161,7 @@ const startQuestion = () => {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(question);
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
     }
-    // ampty answer container and fill it acording to type
+    // empty answer container and fill it according to type
     document.querySelector(`.tillsmsAnswersContainer`).innerHTML = "";
     switch (objTillsmsCurrentQuestion.type) {
         case "manyChoices":
@@ -176,16 +180,17 @@ const startQuestion = () => {
                 document.querySelector(`.tillsmsAnswersContainer`).append(answer);
             })
             break;
+        // Add the info as if it were another question 
         case "info":
             document.querySelector(".tillsmsExerArrow").style.pointerEvents = "none";
             let answer = El("div", {classes: ["info-keyboard"]}, "קיבלתם הודעה חדשה, קראו אותה");
             document.querySelector(`.tillsmsAnswersContainer`).append(answer);
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
             setTimeout(() => {
-                console.log("timeout");
                 nextQuestion()
             }, 3000);
             break;
+        // iterates through Object.keys() because objTillsmsCurrentQuestion.answers is an object. otherwise, similar to "manyChoices" case
         case "crossroadQuestion": 
             tillsmsCurrentAns = [];
             Object.keys(objTillsmsCurrentQuestion.answers).forEach((ans, index) => {
@@ -201,8 +206,10 @@ const startQuestion = () => {
     if (objTillsmsCurrentQuestion.type !== "info") {
         // control answers grid columns
         document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = "";
-        document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = `repeat(${Math.ceil(Math.sqrt(objTillsmsCurrentQuestion.answers.length))}, 1fr)`;
-        if (objTillsmsCurrentQuestion.type !== "crossroadQuestion") {
+        if (objTillsmsCurrentQuestion.type === "crossroadQuestion") {
+            document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = `repeat(${Math.ceil(Math.sqrt(Object.keys(objTillsmsCurrentQuestion.answers).length))}, 1fr)`;
+        } else {
+            document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = `repeat(${Math.ceil(Math.sqrt(objTillsmsCurrentQuestion.answers.length))}, 1fr)`;
             // collecting correct answers
             strTillsmsCorrectAnswer = [];
             objTillsmsCurrentQuestion.answers.forEach((ans, index) => {
