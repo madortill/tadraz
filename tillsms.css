@@ -159,6 +159,8 @@ body, html {
 .tillsmsExerTitleMain {
     font-size: 2em;
     top: -13vh;
+    font-weight: 500;
+    direction: rtl;
 }
 
 
