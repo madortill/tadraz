@@ -61,9 +61,7 @@ const findAmountOfQuestions = (bigObj) => {
     let counter = 0;
     for (key of Object.keys(bigObj)) {
         for (item of bigObj[key]) {
-            if (item.type !== "info") {
-                counter++;
-            }
+            counter++;
         }
     }
     return counter;
