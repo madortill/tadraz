@@ -1,44 +1,9 @@
 const DATA = [
-    // {
-    //     pic: "../assets/images/questionsPics/example1.jpg",
-    //     title: "הקדמה",
-    //     curretntQuestion: 0,
-    //     status: "לא הותחל",
-    //     startSubSubject: "הקדמה",
-    //     content: {
-    //         "הקדמה": [
-    //             {
-    //                 type: `manyPics`,
-    //                 question: `שאלה עם המון תמונות שאפשר לבחור מהן כמה שרוצים`,
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: ["../assets/images/questionsPics/exemple8.jpg", "../assets/images/questionsPics/exemple8.jpg", "../assets/images/questionsPics/exemple8.jpg", "../assets/images/questionsPics/exemple8.jpg", "../assets/images/questionsPics/exemple8.jpg", "../assets/images/questionsPics/exemple8.jpg"],// the legth will determine how many answers will apear
-    //                 correctAns: [`ans1`, `ans3`] // the legth will determine how many answers are reqwiered
-    //             },
-    //             {
-    //                 type: "info",
-    //                 content: "I knew you were trouble when you walked in, so shame on me now"
-    //             },
-    //             {
-    //                 type: `manyChoices`,
-    //                 question: `שאלה עם המון אפשרויות שאפשר לבחור מהן כמה שרוצים`,
-    //                 // recomended: no more than 16 answers, 8 if the are longer than one word
-    //                 answers: ["תשובה 1", "תשובה 2", "תשובה 3", "תשובה 4", "תשובה 5", "תשובה 6", "תשובה 7", "תשובה 8", "תשובה 9", "תשובה 10", "תשובה 11", "תשובה 12", "תשובה 13", "תשובה 14", "תשובה 15", "תשובה 16",],// the legth will determine how many answers will apear
-    //                 correctAns: [`ans1`, `ans2`, `ans5`] // the legth will determine how many answers are reqwiered
-    //             },
-    //             {
-    //                 type: "crossroadQuestion",
-    //                 question: "אתם יוצאים עם נשק?",
-    //                 answers:  {"כן": "יציאה עם נשק", "לא": "end"} //key = answer, value = subSubject to go to
-    //             }
-    //         ],
-    //         "יציאה עם נשק": [
-    //             { }
-    //         ]
-    //     }
-    // },
+// nextSub is end when you want to end the chat
     {
         pic: "./assets/images/bus.svg",
         title: "בטיחות בדרכים",
+        // curretntQuestion: [current question in sub-subject (number), current sub-subject]
         curretntQuestion: [0, "הקדמה"],
         status: "לא הותחל",
         startSubSubject: "הקדמה",
@@ -54,9 +19,9 @@ const DATA = [
             'תחבצ': [
                 {
                     type: "info",
-                    content: `יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. \n
-                    יש להישאר מדוגם במשך כל הנסיעה \n
-                    יש לנוע רק עם אוזניה אחת. \n
+                    info: `יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. <br>
+                    יש להישאר מדוגם במשך כל הנסיעה. <br>
+                    יש לנוע רק עם אוזניה אחת. <br>
                     יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
                 },
                 {
@@ -84,7 +49,7 @@ const DATA = [
                 },
                 {
                     type: "info",
-                    content: `לא לשכוח את הדגשים לנסיעה ברכב פרטי: \n
+                    info: `לא לשכוח את הדגשים לנסיעה ברכב פרטי: \n
                     1. 7 שעות שינה לפני נהיגה. \n
                     2. אין לנהוג תחת השפעת אלכוהול. \n
                     3. יש לנהוג בהתאם לתנאי מזג האויר.\n
@@ -107,14 +72,14 @@ const DATA = [
                 },
                 {
                     type: "info",
-                    content: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: \n
+                    info: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: \n
                     יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. \n
                     יש להישאר מדוגם במשך כל הנסיעה ולנוע רק עם אוזניה אחת.\n
                     יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
                 },
                 {
                     type: "info",
-                    content: `לא לשכוח גם את הדגשים לנסיעה ברכב פרטי: \n
+                    info: `לא לשכוח גם את הדגשים לנסיעה ברכב פרטי: \n
                     1. 7 שעות שינה לפני נהיגה. \n
                     2. אין לנהוג תחת השפעת אלכוהול. \n
                     3. יש לנהוג בהתאם לתנאי מזג האויר. \n 
@@ -130,7 +95,7 @@ const DATA = [
             "רכב": [
                 {
                     type: "info",
-                    content: `1. 7 שעות שינה לפני נהיגה. \n
+                    infp: `1. 7 שעות שינה לפני נהיגה. \n
                     2. אין לנהוג תחת השפעת אלכוהול. \n
                     3. יש לנהוג בהתאם לתנאי מזג האויר. \n 
                     4. יש להימנע מהסחים במהלך הנהיגה: טלפון, מזון ועוד. \n
@@ -138,7 +103,7 @@ const DATA = [
                 },
                 {
                     type: "info",
-                    content: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: \n
+                    info: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: \n
                     יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. \n
                     יש להישאר מדוגם במשך כל הנסיעה \n
                     יש לנוע רק עם אוזניה אחת. \n
@@ -160,7 +125,7 @@ const DATA = [
             "סימנים": [
                 {
                     type: "info",
-                    content: `חמשת המ״מים: \n  מזג אוויר- ביגוד שאינו תואם למזג האוויר \n ממדים- ביגוד אינו תואם את מימדי התוקף \n
+                    info: `חמשת המ״מים: \n  מזג אוויר- ביגוד שאינו תואם למזג האוויר \n ממדים- ביגוד אינו תואם את מימדי התוקף \n
                     מסתור- ריבוי מקומות מסתור בביגוד \n מהודר/ מוזנח- לבוש מהודר שאינו תואם את הסביבה/ לבוש סמרטוטים \n משונה- הופעה אשר שונה מהסביבה \n`
                 },
                 {
@@ -200,7 +165,7 @@ const DATA = [
             "יציאה עם נשק": [
                 {
                     type: "info",
-                    content: "ענו על האמירות הבאות:"
+                    info: "ענו על האמירות הבאות:"
                 },
                 {
                     type: `manyChoices`,
@@ -279,15 +244,15 @@ const DATA = [
             "הסבר": [
                 {
                     type: "info",
-                    content: "זמינות להפעלת נכס לאומי ע״י המפקדים"
+                    info: "זמינות להפעלת נכס לאומי ע״י המפקדים"
                 },
                 {
                     type: "info",
-                    content: "טלפון דלוק במהלך השבת למקרה של הקפצה"
+                    info: "טלפון דלוק במהלך השבת למקרה של הקפצה"
                 },
                 {
                     type: "info",
-                    content: "הכרת מספרי המפקדים והחמ״ל"
+                    info: "הכרת מספרי המפקדים והחמ״ל"
                 },
                 {
                     type: "crossroadQuestion",
@@ -298,7 +263,7 @@ const DATA = [
             "נכסל": [
                 {
                     type: "info",
-                    content: "יש לעדכן את המפקדים וזכור: לא עולים על טרמפים!"
+                    info: "יש לעדכן את המפקדים וזכור: לא עולים על טרמפים!"
                 },
                 {
                     type: "crossroadQuestion",
@@ -309,7 +274,8 @@ const DATA = [
             "בטחון מידע": [
                 {
                     type: "info",
-                    content: " אין להעלות לרשתות החברתיות תוכן צבאי, לשוחח על נושאים צבאיים, לנקוב מיקומים ולמנות סד״כ ברשתות או במקומות אזרחיים."
+                    info: " אין להעלות לרשתות החברתיות תוכן צבאי, לשוחח על נושאים צבאיים, לנקוב מיקומים ולמנות סד״כ ברשתות או במקומות אזרחיים.",
+                    nextSub: "end"
                 },
             ]
 

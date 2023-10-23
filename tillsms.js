@@ -2,6 +2,7 @@
 let ntillsmsCorrectAnswers = 0;
 let strTillsmsCorrectAnswer = [];
 let ntillsmsCurrentQuestion;
+let totalQuestionsInSubject = 0;
 let arrtillsmsQuestions = DATA;
 let pageNum = 1;
 let tillsmsCurrentExer;
@@ -9,7 +10,6 @@ let tillsmsCurrentAns
 let objTillsmsCurrentQuestion;
 let nTillsmsAmountOfExers = arrtillsmsQuestions.length;
 let bTillsmsRestart = false;
-let amountOfTillsmsQuestions = 0;
 let nTillsmsQuestionAnswered = 0;
 let bTillsmsVisited = false;
 let currSubSubject = "";
@@ -25,6 +25,9 @@ window.addEventListener("load", () => {
     createtillsmsContent();
 });
 
+/* openFullscreen
+--------------------------------------------------------------
+Description: enter full screen */
 function openFullscreen() {
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
@@ -41,6 +44,9 @@ function openFullscreen() {
     document.addEventListener('webkitfullscreenchange', exitHandler, false);
 }
 
+/* exitHandler
+--------------------------------------------------------------
+Description: exit full screen */
 function exitHandler(){
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
         let addFullscreen = El("img", {attributes: {src: "./assets/images/fullScreenButton.svg", class: "fullScreenButton"}, listeners: {"click": openFullscreen}});
@@ -60,7 +66,7 @@ Description: start tillsms app*/
 const createtillsmsContent = () => {
     let navBar = El("div", {classes: ["tillsmsTopNav", "centerX"]},
         El("div", {classes: ["tillsmsExercise", "tillsmsCategory1", "tillsmsCategory", "centerX"],},
-            El("div", {classes: ["centerX", "tillsmsExerTitleMain"]},  "תרגולים"),
+            El("div", {classes: ["centerX", "tillsmsExerTitleMain"]},  "תדר\"ץ"),
             El("div", {classes: ["tillsmsExerciseCounter", "centerX"]}, `${nTillsmsAmountOfExers} צאטים שלא נקראו`),
         ),
     );
@@ -128,8 +134,7 @@ const startExer = (event) => {
 Description: */
 const startQuestion = () => {
     // restore event listeners and save current question object
-    objTillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].content[currSubSubject][ntillsmsCurrentQuestion]; 
-    console.log(objTillsmsCurrentQuestion);
+    objTillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].content[currSubSubject][ntillsmsCurrentQuestion];
     // create question container on first visit and shoe it on next visits
     if (!document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`)) {
         let questionContainer = El("div", {classes: ["tillsmsQuestionContainer", `tillsmsQuestionContainer${tillsmsCurrentExer}`]});
@@ -146,8 +151,9 @@ const startQuestion = () => {
     if (!document.querySelector(`.Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}Question${ntillsmsCurrentQuestion}`)) { 
         let question = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Sub${removeSpaceAndStuff(currSubSubject)}Question${ntillsmsCurrentQuestion}`]},
             El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
-            El("div",{cls: "tillsmsQuestion"}, objTillsmsCurrentQuestion.question ?? objTillsmsCurrentQuestion.content),
+            El("div",{cls: "tillsmsQuestion"}, ),
         );
+        question.querySelector(".tillsmsQuestion").innerHTML = objTillsmsCurrentQuestion.question ?? objTillsmsCurrentQuestion.info
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(question);
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
     }
@@ -172,20 +178,12 @@ const startQuestion = () => {
             break;
         case "info":
             document.querySelector(".tillsmsExerArrow").style.pointerEvents = "none";
-            let answer = El("div", {classes: []}, "קיבלתם הודעה חדשה, קראו אותה");
+            let answer = El("div", {classes: ["info-keyboard"]}, "קיבלתם הודעה חדשה, קראו אותה");
             document.querySelector(`.tillsmsAnswersContainer`).append(answer);
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
             setTimeout(() => {
                 console.log("timeout");
-                arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0]++;
-                ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0];
-                document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`;
-                if(ntillsmsCurrentQuestion <  findAmountOfQuestions(arrtillsmsQuestions[exer].content)) {
-                    startQuestion();
-                } else {
-                    endTillsmsExer();
-                }
-                document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
+                nextQuestion()
             }, 3000);
             break;
         case "crossroadQuestion": 
@@ -201,7 +199,7 @@ const startQuestion = () => {
     document.querySelector(`.tillsmsSendArrow`).classList.add("disabled");
 
     if (objTillsmsCurrentQuestion.type !== "info") {
-        // control grid columns
+        // control answers grid columns
         document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = "";
         document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = `repeat(${Math.ceil(Math.sqrt(objTillsmsCurrentQuestion.answers.length))}, 1fr)`;
         if (objTillsmsCurrentQuestion.type !== "crossroadQuestion") {
@@ -215,6 +213,8 @@ const startQuestion = () => {
                 })
             })
         }
+    } else {
+        document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = "100%";
     }
 
 }
@@ -301,7 +301,7 @@ const checkAnswer = () => {
     document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="none";
     document.querySelector(`.tillsmsSendArrow`).removeEventListener("click", checkAnswer);
     if (objTillsmsCurrentQuestion.type !== "crossroadQuestion") {
-        // check if answer was correct, if so update varuble and send messege
+        // send feedback (correct or incorrect + explanation)
         setTimeout(() => {
             let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble"]},
             El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
@@ -325,67 +325,63 @@ const checkAnswer = () => {
                 }
             }
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
-            // update current answer in array and resave it to varuble
-            arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0]++;
-            ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0];
-            document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`,
-            document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`;
-            document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerAmount`).innerHTML = `${findAmountOfQuestions(arrtillsmsQuestions[exer].content) - ntillsmsCurrentQuestion}`
             nTillsmsQuestionAnswered++
         }, 1500);
-
-            // move to next question or end exer
+        
+        // move to next question or end exer
         setTimeout(() => {
-            //  make sure we didn't reach the end of questions in subSubject
-            if ((ntillsmsCurrentQuestion) !== arrtillsmsQuestions[tillsmsCurrentExer].content[currSubSubject].length) { 
-                document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
-                startQuestion();
-            } else if (objTillsmsCurrentQuestion.nextSub) {
-                nextSub();
-                return
-            } else {
-                console.error(`Please add "nextSub" to the last question in each subSubject. problem in ${objTillsmsCurrentQuestion.quesiton}`);
-                return;
-            }
-
+            nextQuestion(answerContentToSend)
         }, 3000);
     } else {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
-        // update current answer in array and resave it to varuble
-        arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0]++;
-        ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0];
-        document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`,
-        document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`;
-        document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerAmount`).innerHTML = `${findAmountOfQuestions(arrtillsmsQuestions[exer].content) - ntillsmsCurrentQuestion}`
-
+        
         setTimeout(() => {
-            nextSub();
+            nextQuestion(answerContentToSend);
         }, 1500)
     }
+}
 
+// Check if this is last sub. If not, change sub-sbuject and 
+const nextSub = (answerContentToSend) => {
+    let subToGoto = objTillsmsCurrentQuestion.type === "crossroadQuestion" ? objTillsmsCurrentQuestion.answers[answerContentToSend] : objTillsmsCurrentQuestion.nextSub;
+    if (subToGoto === "end") {
+        document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
+        endTillsmsExer();
+        return;
+    } else 
+    currSubSubject = subToGoto;
+    ntillsmsCurrentQuestion = 0;
+    arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0] = 0;
+    arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[1] = currSubSubject;
+    startQuestion();
+}
 
-    const nextSub = () => {
-        let subToGoto = objTillsmsCurrentQuestion.type === "crossroadQuestion" ? objTillsmsCurrentQuestion.answers[answerContentToSend] : objTillsmsCurrentQuestion.nextSub;
-        if (subToGoto === "end") {
-            document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
-            endTillsmsExer();
-            return;
-        } else 
-        currSubSubject = subToGoto;
-        ntillsmsCurrentQuestion = 0;
-        arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0] = 0;
-        arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[1] = currSubSubject;
+/* nextQuestion
+--------------------------------------------------------------
+Description: increase current question counters (both saved in arr and in ntillsmsCurrentQuestion), change the display on screen, 
+move to nextSub or start a new question */
+const nextQuestion = (answerContentToSend) => {
+    // update current answer in array and resave it to varible
+    arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0]++;
+    ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion[0];
+    document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`,
+    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${ntillsmsCurrentQuestion}/${findAmountOfQuestions(arrtillsmsQuestions[exer].content)}`;
+    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerAmount`).innerHTML = `${findAmountOfQuestions(arrtillsmsQuestions[exer].content) - ntillsmsCurrentQuestion}`
+
+    document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
+    //  make sure we didn't reach the end of questions in subSubject
+    if (objTillsmsCurrentQuestion.type === "crossroadQuestion") {
+        nextSub(answerContentToSend);
+        return
+    } else if (objTillsmsCurrentQuestion.nextSub) {
+        nextSub();
+    } else if ((ntillsmsCurrentQuestion) !== arrtillsmsQuestions[tillsmsCurrentExer].content[currSubSubject].length) { 
         startQuestion();
+    } else {
+        console.error(`Please add "nextSub" to the last question in each subSubject. problem in ${objTillsmsCurrentQuestion.quesiton}`);
+        return;
     }
-    // move to next question or end exer
-    // setTimeout(() => {
-    //     document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
-    //     if(ntillsmsCurrentQuestion <  findAmountOfQuestions(arrtillsmsQuestions[exer].content)) {
-    //         startQuestion();
-    //     } else {
-    //         endTillsmsExer();
-    //     }
-    // }, 3000);
+
 }
 
 /* endTillsmsExer
