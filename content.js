@@ -71,7 +71,7 @@ const DATA = [
                     type: `crossroadQuestion`,
                     question: `זוכר/ת שאסור לעלות על טרמפים?`,
                     // recomended: no more than 16 answers, 8 if the are longer than one word
-                    answers: { "כן": "איסור טרמפ", "לא": "איסור טרמפ" }
+                    answers: { "כן": "איסור טרמפים טרמפ", "לא": "איסור טרמפים טרמפ" }
                 }
             ],
             "איסור טרמפים": [
@@ -82,8 +82,6 @@ const DATA = [
                     answers: ["סכנה בחטיפת חיילים", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה.", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור.`, "שיהיה מביך ברכב", "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`, `ans2`, `ans3`] // the legth will determine how many answers are reqwiered
                 },
-            ],
-            'תחבצ': [
                 {
                     type: "info",
                     content: `לא לשכוח את הדגשים לנסיעה ברכב פרטי: \n
@@ -94,27 +92,12 @@ const DATA = [
                     5. יש לשים לב למשתמשי דרך.`
                 },
                 {
-                    type: "info",
-                    content: `לא לשכוח את הדגשים לנסיעה בתחבורה ציבורית: \n
-                    יש לעלות על תחבורה תקנית שמגיע ליעד הרצוי. \n
-                    יש להישאר מדוגם במשך כל הנסיעה \n
-                    יש לנוע רק עם אוזניה אחת. \n
-                    יש לגלות ערנות ולחפש סימנים מחשידים שבהם ניזכר בהמשך.`
-                },
-                {
-                    type: `manyChoices`,
-                    question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
-                    // recomended: no more than 16 answers, 8 if the are longer than one word
-                    answers: ["סכנה בחטיפת חיילים", "שיהיה מביך ברכב", "חוסר היכרות עם הנהג ושיקול הדעת בנהיגה", `אי עמידה בחוקי צה״ל שתגרור מענה משמעתי חמור`, "שיוריד אותי רחוק מהבית", "שהרכב יתקלקל בדרך"],// the legth will determine how many answers will apear
-                    correctAns: [`ans1`, `ans3`, `ans4`] // the legth will determine how many answers are reqwiered
-                },
-                {
                     type: "crossroadQuestion",
                     question: "האם אתה יודע מהם הסימנים המחשידים?",
                     answers: { "כן": "סימנים", "לא": "סימנים" }
                 }
             ],
-            "איסור טרמפ": [
+            "איסור טרמפים טרמפ": [
                 {
                     type: `manyChoices`,
                     question: `זוכרים את 3 הסיבות לאיסור על טרמפים? בחרו:`,
@@ -191,7 +174,6 @@ const DATA = [
                 {
                     type: `manyChoices`,
                     question: `מה הופך את האדם לחשוד?`,
-                    nextSub: "end",
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: ["מזג אוויר", "ממדים", "מסתור", `מהודר/ מוזנח`, "משונה"],// the legth will determine how many answers will apear
                     correctAns: [`ans1`, 'ans3'] // the legth will determine how many answers are reqwiered
@@ -265,7 +247,6 @@ const DATA = [
                     explain: `הנשק הינו רכוש צהל, ופעולה זו מהווה עבירה בציר הצבאי והן האזרחי.`
                 },
             ]
-
         }
     },
     {
