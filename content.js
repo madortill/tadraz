@@ -242,6 +242,7 @@ const DATA = [
                 {
                     type: `manyChoices`,
                     question: `האם מותר להשתמש בנשק לטובת עבודה אזרחית בסופש?`,
+                    nextSub: "end",
                     // recomended: no more than 16 answers, 8 if the are longer than one word
                     answers: ["נכון", "לא נכון"],// the legth will determine how many answers will apear
                     correctAns: [`ans2`], // the legth will determine how many answers are reqwiered
