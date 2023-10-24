@@ -375,7 +375,7 @@ svg.bubbleArrow  {
     height: 29.5vh;
     display: grid;
     overflow-y: scroll;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     /* padding-bottom: 2.8rem; */
     /* align-content: center; */
