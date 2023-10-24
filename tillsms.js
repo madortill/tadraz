@@ -66,7 +66,7 @@ Description: start tillsms app*/
 const createtillsmsContent = () => {
     let navBar = El("div", {classes: ["tillsmsTopNav", "centerX"]},
         El("div", {classes: ["tillsmsExercise", "tillsmsCategory1", "tillsmsCategory", "centerX"],},
-            El("div", {classes: ["centerX", "tillsmsExerTitleMain"]},  "תדר״ץ"),
+            El("div", {classes: ["centerX", "tillsmsExerTitleMain"]},  "בטחון אישי"),
             El("div", {classes: ["tillsmsExerciseCounter", "centerX"]}, `${nTillsmsAmountOfExers} צאטים שלא נקראו`),
         ),
     );

@@ -1,6 +1,6 @@
 const DATA = [
     {
-        pic: "./assets/images/door.svg",
+        pic: "./assets/images/logo.svg",
         title: "הקדמה",
         curretntQuestion: [0, "הקדמה"],
         status: "לא הותחל",
