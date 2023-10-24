@@ -29,19 +29,19 @@ window.addEventListener("load", () => {
 --------------------------------------------------------------
 Description: enter full screen */
 function openFullscreen() {
-    // if (elem.requestFullscreen) {
-    //   elem.requestFullscreen();
-    // } else if (elem.mozRequestFullscreen) { /* Firefox */
-    //   elem.mozRequestFullScreen();
-    // } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-    //   elem.webkitRequestFullscreen();
-    // } else if (elem.msRequestFullscreen) { /* IE/Edge */
-    //   elem.msRequestFullscreen();
-    // } 
-    // document.addEventListener('fullscreenchange', exitHandler, false);
-    // document.addEventListener('mozfullscreenchange', exitHandler, false);
-    // document.addEventListener('MSFullscreenChange', exitHandler, false);
-    // document.addEventListener('webkitfullscreenchange', exitHandler, false);
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullscreen) { /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    } 
+    document.addEventListener('fullscreenchange', exitHandler, false);
+    document.addEventListener('mozfullscreenchange', exitHandler, false);
+    document.addEventListener('MSFullscreenChange', exitHandler, false);
+    document.addEventListener('webkitfullscreenchange', exitHandler, false);
 }
 
 /* exitHandler
