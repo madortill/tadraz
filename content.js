@@ -1,4 +1,24 @@
 const DATA = [
+    {
+        pic: "./assets/images/door.svg",
+        title: "הקדמה",
+        curretntQuestion: [0, "הקדמה"],
+        status: "לא הותחל",
+        startSubSubject: "הקדמה",
+        content: {
+            'הקדמה': [
+                {
+                    type: "info",
+                    info: "לפניכם צ׳אט שנועד לתרום לבטחונכם האישי טרם יציאה הביתה.",
+                },
+                {
+                    type: "info",
+                    info: "שימו לב שאתם עונים על כלל הצ׳אטים.",
+                    nextSub: "end"
+                },
+            ],
+        }
+    },
 // nextSub is end when you want to end the chat
     {
         pic: "./assets/images/bus.svg",
