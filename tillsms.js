@@ -37,7 +37,9 @@ function openFullscreen() {
       elem.webkitRequestFullscreen();
     } else if (elem.msRequestFullscreen) { /* IE/Edge */
       elem.msRequestFullscreen();
-    } 
+    } else {
+        document.querySelector("body").classList.add("not-full-screen");
+    }
     document.addEventListener('fullscreenchange', exitHandler, false);
     document.addEventListener('mozfullscreenchange', exitHandler, false);
     document.addEventListener('MSFullscreenChange', exitHandler, false);
@@ -52,6 +54,7 @@ function exitHandler(){
         let addFullscreen = El("img", {attributes: {src: "./assets/images/fullScreenButton.svg", class: "fullScreenButton"}, listeners: {"click": openFullscreen}});
         document.querySelector(".logoAndFullScreen").prepend(addFullscreen);
         document.exitFullscreen();
+        document.querySelector("body").classList.add("not-full-screen");
     } else {
         let addFullscreen = document.querySelector(".fullScreenButton")
         if (addFullscreen) {
