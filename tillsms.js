@@ -22,7 +22,7 @@ var elem = document.querySelector("html");
 Description: */
 window.addEventListener("load", () => { 
     document.querySelector(`.loader`).classList.add(`fade`);
-    // elem.addEventListener(`click`,openFullscreen);
+    elem.addEventListener(`click`,openFullscreen);
     createtillsmsContent();
 });
 
