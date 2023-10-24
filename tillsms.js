@@ -13,6 +13,7 @@ let nTillsmsQuestionAnswered = 0;
 let bTillsmsVisited = false;
 let currSubSubject = "";
 let totalCountInSubj; // only to show how many questions left, is not used for logic
+let infoTimeOut;
 
 var elem = document.querySelector("html");
 
@@ -195,7 +196,7 @@ const startQuestion = () => {
             let answer = El("div", {classes: ["info-keyboard"]}, "קיבלתם הודעה חדשה, קראו אותה");
             document.querySelector(`.tillsmsAnswersContainer`).append(answer);
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
-            setTimeout(() => {
+            infoTimeOut = setTimeout(() => {
                 nextQuestion()
             }, 3000);
             break;
@@ -449,6 +450,7 @@ const endTillsmsExer = () => {
 
 let timesClicked = 0;
 const secretFunction = (event) => {
+    clearTimeout(infoTimeOut);
     if ((tillsmsCurrentExer + 1) === Object.keys(arrtillsmsQuestions).length) {
         timesClicked++;
         if (timesClicked === 4) {
