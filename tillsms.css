@@ -19,6 +19,9 @@ body, html {
     background-repeat: no-repeat;
 }
 
+.not-full-screen {
+    height: 90vh;
+}
 
 /* loder */
 .loader {
@@ -49,7 +52,7 @@ body, html {
 .topBar {
     background-color: var(--tillsmsMainDark);
     color: white;
-    height: 5%;
+    height: 5vh;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -66,7 +69,7 @@ body, html {
 }
 
 .topBar img {
-    height: 3%;
+    height: 3vh;
     padding: 0.3em 0.6em;
 }
 
@@ -96,7 +99,7 @@ body, html {
     align-items: center;
     position: fixed;
     flex-wrap: wrap;
-    top: -25%;
+    top: -25vh;
     left: 0;
     border-radius: 0em 0em 1em 1em;
     visibility: hidden;
@@ -136,7 +139,7 @@ body, html {
     background-color: var(--tillsmsMainLight);
     position: absolute;
     width: 100%;
-    height: 20%;
+    height: 20vh;
     box-shadow: 0px -3px 10px black;
 }
 
@@ -144,7 +147,7 @@ body, html {
     color: white;
     font-size: 1.3em;
     position: absolute;
-    top: 5%;
+    top: 5vh;
     padding: 1em;
 }
 
@@ -159,7 +162,7 @@ body, html {
 
 .tillsmsExerTitleMain {
     font-size: 2em;
-    top: -13%;
+    top: -13vh;
     font-weight: 500;
     direction: rtl;
 }
@@ -174,15 +177,15 @@ body, html {
 .tillsmsExerciseCounter {
     width: 53.5vw;
     text-align: center;
-    top: -6%;
+    top: -6vh;
     margin-right: 0.7em;
 }
 
 .tillsmsContainer {
     position: absolute;
     width: 100%;
-    top: 20%;
-    height: 80%;
+    top: 20vh;
+    height: 80vh;
     overflow-y: scroll;
 }
 
@@ -270,7 +273,7 @@ body, html {
     background-color: var(--tillsmsMainLight);
     position: absolute;
     width: 100%;
-    height: 16%;
+    height: 16vh;
     box-shadow: 0px -3px 10px black;
 }
 
@@ -288,8 +291,8 @@ body, html {
 .tillsmsQuestionContainer {
     position: absolute;
     width: 100%;
-    height: 46%;
-    top: 16%;
+    height: 46vh;
+    top: 16vh;
     overflow: scroll;
 }
 
@@ -327,7 +330,7 @@ svg.bubbleArrow  {
 }
 
 .tillsmsSendBar {
-    height: 5%;
+    height: 5vh;
     width: 73vw;
     background-color: rgb(255 255 255);
     border: none;
@@ -341,7 +344,7 @@ svg.bubbleArrow  {
 }
 
 .tillsmsSendBarWithPic {
-    height: 11%;
+    height: 11vh;
     border-radius: 1em;
 }
 
@@ -355,21 +358,21 @@ svg.bubbleArrow  {
     align-items: center;
     margin: 0.6em;
     position: absolute;
-    bottom: 29.5%;
+    bottom: 29.5vh;
     width: 96%;
 }
 
 .tillsmsAnswerKeybord {
-    position: fixed;
+    position: absolute;
     width: 100%;
-    height: 38%;
+    height: 38vh;
     bottom: 0;
 }
 
 .tillsmsAnswersContainer {
     background-color: var(--tillsmsMainLight);
     width: 100%;
-    height: 29.5%;
+    height: 29.5vh;
     display: grid;
     overflow-y: scroll;
     position: absolute;
@@ -436,7 +439,7 @@ svg.bubbleArrow  {
 
 .tillsmsSendHomeButtonMainPage {
     position: fixed;
-    bottom: 2%;
+    bottom: 2vh;
     background-color: var(--tillsmsMainDark);
     padding: 0.6em;
     border-radius: 0.6em;
@@ -453,7 +456,7 @@ svg.bubbleArrow  {
     background-color: var(--tillsmsMainDark);
     position: absolute;
     width: 100%;
-    height: 15%;
+    height: 15vh;
     box-shadow: 0px -3px 10px black;
     display: flex;
     align-items: flex-end;
@@ -466,7 +469,7 @@ svg.bubbleArrow  {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     direction: ltr;
-    bottom: 7%;
+    bottom: 7vh;
 }
 
 .simonButton {
@@ -474,7 +477,7 @@ svg.bubbleArrow  {
     color: var(--tillsmsMainLight);
     border: 0.2em solid var(--tillsmsMainLight);
     width: 19vw;
-    height: 6%;
+    height: 6vh;
     margin: 0.3em 0.5em;
     padding-top: 0.3em;
     text-align: center;
@@ -530,7 +533,7 @@ svg.bubbleArrow  {
 .tillsmsRestartGameText,.tillsmsStartGameText {
     text-align: center;
     font-size: 1.8em;
-    top: 30%;
+    top: 30vh;
     width: 70vw;
     font-weight: 800;
 }
@@ -545,7 +548,7 @@ svg.bubbleArrow  {
 
 .tillsmsRestartGameButton,.tillsmsStartGameButton {
     width: 11vw;
-    height: 6%;
+    height: 6vh;
     background-color: var(--tillsmsMainDark);
     color: var(--tillsmsMainLight);
     border: 0.4em solid var(--tillsmsMainLight);
@@ -570,7 +573,7 @@ svg.bubbleArrow  {
     color: var(--tillsmsMainDark);
     font-size: 2.8em;
     font-weight: 800;
-    top: 36%;
+    top: 36vh;
 }
 
 .tillsmsEndGame {
@@ -578,7 +581,7 @@ svg.bubbleArrow  {
     top: 0;
     left: 0;
     width: 90vw;
-    height: 88%;
+    height: 88vh;
     z-index: 4;
     color: white;
     background: linear-gradient(-45deg, #e73c7e 10%, var(--tillsmsMainDark) 40%, var(--tillsmsMainLight) 70%);
@@ -588,11 +591,11 @@ svg.bubbleArrow  {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    padding: 6% 5vw;
+    padding: 6vh 5vw;
 }
 
 .tillsmsGameEndPerson {
-    top: 15%;
+    top: 15vh;
     width: 34vw;
     padding: 1.3em 0.8em 0.3em;
     border: 0.3em solid #ffffff;
@@ -602,14 +605,14 @@ svg.bubbleArrow  {
 
 .tillsmsGameEndButton  {
     width: 15vw;
-    bottom: 10%;
+    bottom: 10vh;
     background-color: red;
     border-radius: 50%;
     padding: 0.4em;
 }
 
 .tillsmsGameEndName {
-    top: 43%;
+    top: 43vh;
     font-size: 1.6em;
     font-family: "Heebo";
     text-align: center;
