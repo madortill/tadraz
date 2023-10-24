@@ -1,4 +1,24 @@
 const DATA = [
+    {
+        pic: "./assets/images/logo.svg",
+        title: "הקדמה",
+        curretntQuestion: [0, "הקדמה"],
+        status: "לא הותחל",
+        startSubSubject: "הקדמה",
+        content: {
+            'הקדמה': [
+                {
+                    type: "info",
+                    info: "לפניכם צ׳אט שנועד לתרום לבטחונכם האישי טרם יציאה הביתה.",
+                },
+                {
+                    type: "info",
+                    info: "שימו לב שאתם עונים על כלל הצ׳אטים.",
+                    nextSub: "end"
+                },
+            ],
+        }
+    },
 // nextSub is end when you want to end the chat
     {
         pic: "./assets/images/bus.svg",
@@ -279,6 +299,30 @@ const DATA = [
                 },
             ]
 
+        }
+    },
+    {
+        pic: "./assets/images/door.svg",
+        title: 'פיקוד העורף',
+        curretntQuestion: [0, "הקדמה"],
+        status: "לא הותחל",
+        startSubSubject: "הקדמה",
+        content: {
+            'הקדמה': [
+                {
+                    type: "info",
+                    info: "צפו בסרטון הקצר שמסביר מהן הנחיות התגוננות מטילים:",
+                },
+                {
+                    type: "info",
+                    info: '<iframe width="260" height="145" src="https://www.youtube.com/embed/9BMH_58WOEI?si=oTt0Bx1gTISeyfhr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen></iframe>',
+                },
+                {
+                    type: "info",
+                    info: "חשוב לדעת ולהכיר את מפת ההתגוננות הארצית: <a href='https://www.oref.org.il/12487-15896-he/Pakar.aspx'>לחצו כאן</a>",
+                    nextSub: "end"
+                },
+            ],
         }
     },
 ]
