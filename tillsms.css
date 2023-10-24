@@ -648,3 +648,12 @@ svg.bubbleArrow  {
 #tillsmsProgressBar { 
     width: 60vw;
 }
+
+iframe {
+    max-width: 100%;
+}
+
+.info-keyboard {
+    display: flex;
+    align-items: center;
+}

@@ -197,7 +197,7 @@ const startQuestion = () => {
             document.querySelector(`.tillsmsAnswersContainer`).append(answer);
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
             infoTimeOut = setTimeout(() => {
-                nextQuestion()
+                // nextQuestion()
             }, 3000);
             break;
         // iterates through Object.keys() because objTillsmsCurrentQuestion.answers is an object. otherwise, similar to "manyChoices" case
