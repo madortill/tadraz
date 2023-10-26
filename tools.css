@@ -11,6 +11,12 @@
     font-weight: 100;
 }
 
+@font-face {
+    font-family: Heebo;
+    src: url("./assets/fonts/heebo/Heebo-Bold.ttf");
+    font-weight: 700;
+}
+
 /* animations */
 @keyframes fadeOut {
     100% {
