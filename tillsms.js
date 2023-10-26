@@ -23,7 +23,11 @@ Description: */
 window.addEventListener("load", () => { 
     document.querySelector(`.loader`).classList.add(`fade`);
     elem.addEventListener(`click`,openFullscreen);
-    createtillsmsContent();
+    document.getElementById('start').addEventListener("click", () => { 
+        document.querySelector(".open-screen").classList.add("hidden");
+        document.querySelector("main").classList.remove("hidden");
+        createtillsmsContent();
+    });
 });
 
 /* openFullscreen
@@ -439,7 +443,7 @@ const endTillsmsExer = () => {
         document.querySelector(".tillsmsExerArrow").style.pointerEvents = "none";
         let finishMessage = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble",], listeners: {click: sendHome}},
             El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
-            El("div",{classes: ["tillsmsQuestion", "tillsmsSendHomeMessege"]}, "לחצו כדי להמשיך למסך הסיום",
+            El("div",{classes: ["tillsmsQuestion", "tillsmsSendHomeMessege"]}, "לחצו כדי לצאת מהלומדה",
                 El("img", {attributes: {src: "./assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton"}})
             ),
         );
@@ -504,10 +508,22 @@ const secretFunction = (event) => {
 
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
         
+            let finishMessage = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble",], listeners: {click: sendHome}},
+            El("img",{ attributes: {src: "./assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+            El("div",{classes: ["tillsmsQuestion", "tillsmsSendHomeMessege"]}, "לחצו כדי לצאת מהלומדה",
+                El("img", {attributes: {src: "./assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton"}})
+                ),
+            );
+            document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(finishMessage);
+
             document.querySelector(".tillsmsExerciseCounter").classList.add("hidden");
             document.querySelector(".tillsmsExerArrow").style.pointerEvents = "none";
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).style.scrollBehavior = "smooth";
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
         }
     }
+}
+
+const sendHome = () => {
+    window.close();
 }
