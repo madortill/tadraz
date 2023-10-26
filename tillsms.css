@@ -657,3 +657,11 @@ iframe {
     display: flex;
     align-items: center;
 }
+
+.open-screen {
+    font-size: 2em;
+    top: -13vh;
+    font-weight: 500;
+    direction: rtl;
+    
+}
