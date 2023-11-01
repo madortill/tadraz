@@ -689,3 +689,39 @@ iframe {
     border-radius: 0.4rem;
     font-size: 1.1em;
 }
+
+.odotOrPhone {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    opacity: 0.95;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+#close{
+    background-color: #56100F;
+    color: white;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.4rem;
+    font-size: 1.1em;
+}
+
+.container-titles :first-child {
+    font-size: 2.4vmax;
+    font-weight: 800;
+    color: #56100F;
+  }
+  
+.container-titles :last-child {
+    font-size: 2vmax;
+  }
+
+#text {
+    width: 90%;
+}

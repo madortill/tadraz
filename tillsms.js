@@ -14,6 +14,8 @@ let bTillsmsVisited = false;
 let currSubSubject = "";
 let totalCountInSubj; // only to show how many questions left, is not used for logic
 let infoTimeOut;
+var phoneArr = ["משטרה : " ," 100" , `מד"א : ` , ` 101`, "מכבי אש : " , " 102" , "מוקד לקליטת מידע באשר לחטופים, חיילים ואזרחים : " , "1229" , "לדיווח אודות חיילים נעדרים : " , `המוקד הצה"לי 111 שלוחה 0` , "לאזרחים נעדרים : " , "מוקד 105" , "מהות : " , "03-9482600" , `ער"ן : ` , "1201" , "חמל ביטחון מידע : " , "0733452118" , `לפניות תחבורה ציבורית, שאט"ל והיסעים, וחמ"ל היסעים : ` , "039725454"]
+var odotArr = [`ראש מדור טי"ל : `, `רס"ם שלומי אוגרן` , `ראש תחום מו"פ וחדשנות בלמידה : ` , `רס"ל אביב ואנונו`, "מפתחות לומדה : " , `סמ"ל תמר סטופ, סמ"ל הדר יחזקאל, סמ"ל ניצן סלומון, רב"ט שירה כהן, טוראי גילי אלבז`, "מעצב UX & UI : " , `סמ"ל גפן קופרמן, ס"מל ניצן סולומון`, "מומחה תוכן : ", `רס"ל אביב ואנונו`, "גרסה : ", "10/2023"];
 
 var elem = document.querySelector("html");
 
@@ -28,6 +30,8 @@ window.addEventListener("load", () => {
         document.querySelector("main").classList.remove("hidden");
         createtillsmsContent();
     });
+    document.getElementById('odotAndPhone').addEventListener("click", openOdotOrPhone);
+    document.getElementById('close').addEventListener("click", openOdotOrPhone);
 });
 
 /* openFullscreen
@@ -526,4 +530,25 @@ const secretFunction = (event) => {
 
 const sendHome = () => {
     window.close();
+}
+
+const openOdotOrPhone = (event) => {
+    console.log(event.target.id);
+    if (event.target.id === "close") {
+        document.querySelector(".odotOrPhone").classList.add("hidden");
+    }
+    else{
+        document.querySelector(".odotOrPhone").classList.remove("hidden");
+        let arr = window[`${event.target.id}Arr`];
+        console.log(arr);
+        let odot;
+        document.getElementById("text").innerHTML = '';
+        for (let i = 0; i < arr.length ; i+=2) {
+            odot = El("div", {cls:"container-titles"},
+                        El("span",{}, ...arr[i]),
+                        El("span",{}, ...arr[i+1]),
+                        i % 2 === 0 ? El("br") : null);
+            document.getElementById("text").append(odot);
+        }
+    }
 }
