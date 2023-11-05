@@ -15,7 +15,7 @@ let currSubSubject = "";
 let totalCountInSubj; // only to show how many questions left, is not used for logic
 let infoTimeOut;
 var phoneArr = ["משטרה : " ," 100" , `מד"א : ` , ` 101`, "מכבי אש : " , " 102" , "מוקד לקליטת מידע באשר לחטופים, חיילים ואזרחים : " , "1229" , "לדיווח אודות חיילים נעדרים : " , `המוקד הצה"לי 111 שלוחה 0` , "לאזרחים נעדרים : " , "מוקד 105" , "מהות : " , "03-9482600" , `ער"ן : ` , "1201" , "חמל ביטחון מידע : " , "0733452118" , `לפניות תחבורה ציבורית, שאט"ל והיסעים, וחמ"ל היסעים : ` , "039725454"]
-var odotArr = [`ראש מדור טי"ל : `, `רס"ם שלומי אוגרן` , `ראש תחום מו"פ וחדשנות בלמידה : ` , `רס"ל אביב ואנונו`, "מפתחות לומדה : " , `סמל תמר סטופ, סמל הדר יחזקאל, סמל ניצן סלומון, רב"ט שירה כהן, טוראי גילי אלבז`, "מעצב UX & UI : " , `סמל גפן קופרמן, סמל ניצן סולומון`, "מומחה תוכן : ", `רס"ל אביב ואנונו`, "גרסה : ", "10/2023"];
+var odotArr = [`ראש מדור טי"ל : `, `רס"ם שלומי אוגרן` , `ראש תחום מו"פ וחדשנות בלמידה : ` , `רס"ל אביב ואנונו`, "מפתחות לומדה : " , `סמל תמר סטופ, סמל הדר יחזקאל, סמל ניצן סלומון, רב"ט שירה כהן, טוראי גילי אלבז`, "מעצב UX & UI : " , `סמל גפן קופרמן, סמל ניצן סולומון`, "גרסה : ", "10/2023"];
 
 var elem = document.querySelector("html");
 
@@ -534,6 +534,7 @@ const sendHome = () => {
 
 const openOdotOrPhone = (event) => {
     console.log(event.target.id);
+    document.querySelector(".phoneTitle").classList.add("hidden");
     if (event.target.id === "close") {
         document.querySelector(".odotOrPhone").classList.add("hidden");
     }
@@ -543,17 +544,20 @@ const openOdotOrPhone = (event) => {
         console.log(arr);
         let odot;
         document.getElementById("text").innerHTML = '';
+        if (event.target.id === "phone"){
+            document.querySelector(".phoneTitle").classList.remove("hidden");
+        }
         for (let i = 0; i < arr.length ; i+=2) {
             odot = El("div", {cls:"container-titles"},
                         El("span",{}, ...arr[i]),
-                        El("span",{}, ...arr[i+1]),
+                        El(event.target.id === "odot" ? "span" : "a",{attributes: {href: `tel:${arr[i+1]}`}}, ...arr[i+1]),
                         i % 2 === 0 ? El("br") : null);
             document.getElementById("text").append(odot);
         }
         if (event.target.id === "odot") {
            let email = El("div", {cls:"container-titles"},
                         El("span",{}, ..."צרו קשר : "),
-                        El("a",{attributes: {href: "mailto:madortill@gmail.com"}}, "mailto:madortill@gmail.com"));
+                        El("a",{attributes: {href: "mailto:madortill@gmail.com"}}, "madortill@gmail.com"));
             document.getElementById("text").append(email);
         }
     }
